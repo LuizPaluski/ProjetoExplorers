@@ -32,5 +32,6 @@ class ItemController extends Controller
         }
         $item2 = Item::all()->sum('value');
         return response()->json([$item2, $item], 200 );
+
     }
 }
