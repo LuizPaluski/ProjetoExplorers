@@ -13,12 +13,7 @@ class LocationHistory extends Model
         'explorer_id',
         'latitude',
         'longitude',
-        'desc'
     ];
 
-    public function explorer(): belongsTo
-    {
-        return $this->belongsTo(Explorer::class);
-    }
 
 }
