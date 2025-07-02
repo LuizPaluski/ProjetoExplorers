@@ -14,9 +14,8 @@ Route::post('/trade', [TradeController::class, 'trade']);
 
 //rotas protegidas...
 Route::middleware('auth:sanctum')->group(function () {
-    Route::post('/explorers/me', [ExplorerController::class, 'store']);
-    Route::put('/explorers/me', [ExplorerController::class, 'updateLocation']);
-    Route::patch('/explorers/me', [ExplorerController::class, 'updateLocation']);
+    Route::put('/explorers/me', [ExplorerController::class, 'update']);
+    Route::patch('/explorers/me', [ExplorerController::class, 'update']);
     Route::get('/explorers/me', [ExplorerController::class, 'show']);
     Route::get('/explorers/history', [ExplorerController::class, 'getHistory']);;
     Route::get('/reports', [ItemController::class, 'show']);

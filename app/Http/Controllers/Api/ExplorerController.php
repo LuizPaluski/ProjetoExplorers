@@ -3,46 +3,50 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Explorer;
+use App\Models\LocationHistory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class ExplorerController extends Controller
 {
-    public function store(Request $request)
+    public function update(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|string|max:255',
-            'age' => 'required|integer',
+
+        $explorer = $request->user();
+
+        $validator = Validator::make($request->all(), [
             'latitude' => 'required|numeric',
             'longitude' => 'required|numeric',
         ]);
 
-        $explorer = Explorer::create($validatedData);
+        if ($validator->fails()) {
+            return response()->json($validator->errors(), 422);
+        }
 
-        return response()->json($explorer, 201);
-    }
 
-    public function show($id)
-    {
-        $explorer = Explorer::with('items')->findOrFail($id);
-        return response()->json($explorer);
-    }
-
-    public function updateLocation(Request $request, $id)
-    {
-        $validatedData = $request->validate([
-            'latitude' => 'required|numeric',
-            'longitude' => 'required|numeric',
+        LocationHistory::create([
+            'explorer_id' => $explorer->id,
+            'latitude' => $explorer->latitude,
+            'longitude' => $explorer->longitude,
         ]);
 
-        $explorer = Explorer::findOrFail($id);
-        $explorer->update($validatedData);
+
+        $explorer->update($request->only(['latitude', 'longitude']));
 
         return response()->json($explorer);
     }
-    public function getHistory($id)
+
+    public function show(Request $request)
     {
-        $explorer = Explorer::all('latitude', 'longitude');
-        return response()->json($explorer, 200);
+
+        $explorer = $request->user()->load('items');
+        return response()->json($explorer);
+    }
+
+    public function history(Request $request)
+    {
+
+        $history = $request->user()->locationHistories()->orderBy('created_at', 'desc')->get();
+        return response()->json($history);
     }
 }

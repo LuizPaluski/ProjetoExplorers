@@ -3,34 +3,23 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable; // Mudar para Authenticatable
-use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Explorer extends Authenticatable
+class Item extends Model
 {
-    use HasFactory, HasApiTokens;
+    use HasFactory;
 
     protected $fillable = [
         'name',
-        'email',
-        'password',
-        'age',
+        'value',
         'latitude',
         'longitude',
+        'explorer_id',
     ];
 
-    protected $hidden = [
-        'password',
-    ];
-
-    public function items(): HasMany
+    public function explorer(): BelongsTo
     {
-        return $this->hasMany(Item::class);
-    }
-
-    public function locationHistories(): HasMany
-    {
-        return $this->hasMany(LocationHistory::class);
+        return $this->belongsTo(Explorer::class);
     }
 }
