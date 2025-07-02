@@ -22,4 +22,12 @@ class ItemController extends Controller
 
         return response()->json($item, 201);
     }
+    public function show(Request $request){
+        $item = Item::all()->only('value');
+        if($item > "100" ){
+            $item = Item::all()->count();
+        }
+        $item2 = Item::all()->sum('value');
+        return response()->json([$item2, $item], 200 );
+    }
 }

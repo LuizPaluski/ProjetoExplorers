@@ -40,4 +40,9 @@ class ExplorerController extends Controller
 
         return response()->json($explorer);
     }
+    public function getHistory($id)
+    {
+        $explorer = Explorer::all('latitude', 'longitude');
+        return response()->json($explorer, 200);
+    }
 }
