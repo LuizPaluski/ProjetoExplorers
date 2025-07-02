@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('explorers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email')->unique();
+            $table->string('password');
             $table->integer('age');
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
