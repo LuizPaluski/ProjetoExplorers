@@ -17,7 +17,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('/explorers/me', [ExplorerController::class, 'update']);
     Route::patch('/explorers/me', [ExplorerController::class, 'update']);
     Route::get('/explorers/me', [ExplorerController::class, 'show']);
-    Route::get('/explorers/history', [ExplorerController::class, 'getHistory']);;
+    Route::get('/explorers/history', [ExplorerController::class, 'history']);;
     Route::get('/reports', [ItemController::class, 'show']);
     Route::post('/items', [ItemController::class, 'store']);
 });
