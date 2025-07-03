@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\ExplorerController;
 use App\Http\Controllers\Api\ItemController;
 use App\Http\Controllers\Api\TradeController;
-use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Route;
 
 //login e registro
 Route::post('/register', [AuthController::class, 'register']);

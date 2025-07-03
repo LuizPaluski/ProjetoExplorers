@@ -1,12 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Auth;
 
+use App\Http\Controllers\Controller;
 use App\Models\Explorer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Http; // 1. Importe o cliente HTTP
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Validator;
+
+// 1. Importe o cliente HTTP
 
 class AuthController extends Controller
 {

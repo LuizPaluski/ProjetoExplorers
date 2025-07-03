@@ -47,7 +47,7 @@ class ExplorerController extends Controller
     {
 
         $history =  $request->user()->locationHistories()->orderBy('created_at', 'desc')->get();
-        dd( response()->json($history));
+        return response()->json($history);
 
 
     }
