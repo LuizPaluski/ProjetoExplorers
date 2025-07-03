@@ -46,7 +46,9 @@ class ExplorerController extends Controller
     public function history(Request $request)
     {
 
-        $history = $request->user()->locationHistories()->orderBy('created_at', 'desc')->get();
-        return response()->json($history);
+        $history =  $request->user()->locationHistories()->orderBy('created_at', 'desc')->get();
+        dd( response()->json($history));
+
+
     }
 }

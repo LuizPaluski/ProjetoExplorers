@@ -11,23 +11,17 @@ return new class extends Migration
     {
         Schema::create('location_histories', function (Blueprint $table) {
             $table->id();
-            $table->timestamps();
             $table->foreignId('explorer_id')->constrained()->onDelete('cascade');
-            $table->foreignId('item_id')->constrained()->onDelete('cascade');
             $table->decimal('latitude', 10, 7);
             $table->decimal('longitude', 10, 7);
-            $table->unique(['explorer_id', 'item_id']);
-            $table->index(['latitude', 'longitude']);
-            $table->index(['item_id', 'latitude', 'longitude']);
+            $table->timestamps();
+
             });
 
     }
 
-    /**
-     * Reverse the migrations.
-     */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('location_histories');
     }
 };
